@@ -95,39 +95,47 @@ namespace VikaBD.Server.Controllers
 
         private async Task SendAnswer(Guest guest, bool answer)
         {
-            try
-            {
-                var result = answer ? "'приду'" : "'не приду'";
-                var message = $"{guest.Name.Trim()} сказал {result}";
+            var result = answer ? "'приду'" : "'не приду'";
+            var message = $"{guest.Name.Trim()} сказал {result}";
 
-                message += "\nвсе:\n";
-                message += "https://www.vika-birthday.ru/api/birth-day/guests";
+            message += "\nвсе:\n";
+            message += "https://www.vika-birthday.ru/api/birth-day/guests";
 
-                await SendToChat("1077072257", message);
-                await SendToChat("1338551358", message);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                _logger.LogError(ex.Message, ex);
-            }
+            await SendToChat("1077072257", message);
+            await SendToChat("1338551358", message);
         }
 
         private async Task SendToChat(string chanel, string message)
         {
-            var client = _httpClientFactory.CreateClient();
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
 
-            var key = _configuration["TelegramBotApi:ApiKey"];
-            var headreKey = _configuration["TelegramBotApi:ApiKeyHeader"];
+                var key = _configuration["TelegramBotApi:ApiKey"];
+                var headreKey = _configuration["TelegramBotApi:ApiKeyHeader"];
 
-            var request = new HttpRequestMessage(
-                HttpMethod.Get,
-                $"http://custplace.ru/education-bot/telegram/send-message?chanel={chanel}&message={message}");
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    $"http://custplace.ru/education-bot/telegram/send-message?chanel={chanel}&message={message}");
 
-            request.Headers.Add(headreKey, key);
+                request.Headers.Add(headreKey, key);
 
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+                var response = await client.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var responseTxt = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"IsSuccessStatusCode: {responseTxt}");
+                    _logger.LogError($"ExceIsSuccessStatusCodeption: {responseTxt}");
+                }
+
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+                _logger.LogError($"Exception: {ex.Message}", ex);
+            }
         }
 
     }
