@@ -1,12 +1,32 @@
-<div class="container">
+<ng-container *ngIf="isInitialLoading; else afterInitial">
 
-  <h2 class="one">Привет '{{name}}'</h2>
-  <h2 class="two">Придёшь на</h2>
-  <h2 class="three">мой ДР?</h2>
+  <div class="container"></div>
 
-  <div class="btn-container">
-    <button class="yes" (click)="onYes()">Да</button>
-    <button class="no" (click)="onNo()">Нет</button>
-  </div>
+</ng-container>
 
-</div>
+<ng-template #afterInitial>
+
+  <ng-container *ngIf="isUserFounded; else notFoundedUser">
+
+    <div class="container">
+
+      <h2 class="one">Привет '{{name}}'</h2>
+      <h2 class="two">Придёшь на</h2>
+      <h2 class="three">мой ДР?</h2>
+
+      <div class="btn-container">
+        <button class="yes" (click)="onYes()">Да</button>
+        <button class="no" (click)="onNo()">Нет</button>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <ng-template #notFoundedUser>
+    <div class="container-not-found">
+      <h2>А ну брысь от сюда</h2>
+    </div>
+  </ng-template>
+
+</ng-template>
