@@ -6,7 +6,7 @@
     "serve": "ng serve",
     "start": "run-script-os",
     "build": "ng build",
-    "build:prd": "ng build --configuration production",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prestart": "node aspnetcore-https",
