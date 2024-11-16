@@ -60,6 +60,6 @@ jobs:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-          local_path: "./vikabd.client/dist/vikabd.client/*"
+          local_path: "./vikabd.client/dist/vikabd.client/browser/*"
           remote_path: "/var/www/vikabirthday"
           delete_remote_files: true
