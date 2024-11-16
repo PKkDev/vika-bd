@@ -38,8 +38,11 @@ jobs:
           cache: "npm"
           cache-dependency-path: "./vikabd.client/package-lock.json"
 
-      - name: Run ci
-        run: npm ci
+      #- name: Run ci
+      #  run: npm ci
+
+      - name: Run i
+        run: npm i
 
       #- name: Run tests
       #  run: npm run test:prod
