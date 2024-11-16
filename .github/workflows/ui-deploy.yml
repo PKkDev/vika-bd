@@ -2,14 +2,7 @@ name: UI Build + Deploy
 
 on:
   push:
-    branches: ["main", "dev/*"]
-  #  branches: ["release"]
-  #pull_request:
-  #  branches: ["main", "dev/*"]
-  #  branches: ["release"]
-  #pull_request_target:
-  #  types: ["closed"]
-  #  branches: ["release"]
+    branches: ["main", "dev/*"] 
 
 jobs:
   build:
@@ -23,10 +16,7 @@ jobs:
       matrix:
         node-version: [18.x]
 
-    steps:
-
-#      - name: ui-build action
-#        uses: IndustrialHolding/ui-build@v1
+    steps: 
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,18 +27,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           cache-dependency-path: "./vikabd.client/package-lock.json"
-
-      #- name: Run ci
-      #  run: npm ci
-
+ 
       - name: Run i
-        run: npm i
-
-      #- name: Run tests
-      #  run: npm run test:prod
-
-      #- name: Run lint
-      #  run: npm run lint
+        run: npm i 
 
       - name: Build
         run: npm run build:prod
