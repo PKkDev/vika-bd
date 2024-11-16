@@ -4,16 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Guest } from '../model/guest';
 
 @Component({
-  selector: 'app-main-card',
-  templateUrl: './main-card.component.html',
-  styleUrls: ['./main-card.component.scss']
+  selector: 'app-accepted-card',
+  templateUrl: './accepted-card.component.html',
+  styleUrls: ['./accepted-card.component.scss']
 })
-export class MainCardComponent implements OnInit {
+export class AcceptedCardComponent implements OnInit {
 
   public name: string = 'name';
-
-  public isUserSayNo = false;
-  public isInitialLoading = true;
 
   constructor(
     @Inject('BASE_URL') private baseUrl: string,
@@ -27,13 +24,10 @@ export class MainCardComponent implements OnInit {
     this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.name}`)
       .subscribe({
         next: (value: Guest) => {
-          this.isInitialLoading = false;
-
           if (value) {
             this.name = value.name;
-            if (value.answer) {
-              this.router.navigateByUrl(`accepted/${this.name}`);
-            } else {
+            if (!value.answer) {
+              this.router.navigateByUrl(`${this.name}`);
             }
           } else {
             this.router.navigateByUrl(`error/${this.name}`);
@@ -46,25 +40,15 @@ export class MainCardComponent implements OnInit {
       })
   }
 
-  public onYes() {
-    this.http.put(`${this.baseUrl}/birth-day/guest-say-yes?ident=${this.name}`, null)
+  public onNewAnswer() {
+    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.name}`, null)
       .subscribe({
         next: (value) => {
+          this.router.navigateByUrl(`${this.name}`);
           console.log(value);
-          this.router.navigateByUrl(`accepted/${this.name}`);
         },
         error: (err) => console.error(err),
       })
   }
 
-  public onNo() {
-    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.name}`, null)
-      .subscribe({
-        next: (value) => {
-          console.log(value);
-          this.isUserSayNo = true;
-        },
-        error: (err) => console.error(err),
-      })
-  }
 }

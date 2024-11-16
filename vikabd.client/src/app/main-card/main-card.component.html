@@ -1,14 +1,10 @@
 <ng-container *ngIf="isInitialLoading; else afterInitial">
-
-  <div class="container-not-found">
-    <h2>Что-то пошло не так</h2>
-  </div>
-
+  <div class="container"></div>
 </ng-container>
 
 <ng-template #afterInitial>
 
-  <ng-container *ngIf="isUserFounded; else notFoundedUser">
+  <ng-container *ngIf="!isUserSayNo; else notFoundedUser">
 
     <div class="container">
 
