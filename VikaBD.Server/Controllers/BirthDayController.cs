@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using VikaBD.Server.Context;
 using VikaBD.Server.Model;
 
@@ -12,15 +12,18 @@ namespace VikaBD.Server.Controllers
         private readonly DataContext _context;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
+        private readonly ILogger<BirthDayController> _logger;
 
         public BirthDayController(
             DataContext context,
             IHttpClientFactory httpClientFactory,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            ILogger<BirthDayController> logger)
         {
             _context = context;
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpGet("guests")]
@@ -106,6 +109,7 @@ namespace VikaBD.Server.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                _logger.LogError(ex.Message, ex);
             }
         }
 
