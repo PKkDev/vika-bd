@@ -49,6 +49,8 @@ namespace VikaBD.Server
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
+            builder.Services.AddHttpClient();
+
             builder.Services.Configure<DbConnectOptions>(builder.Configuration.GetSection("NpgSql"));
             builder.Services.AddDbContext<DataContext>(opt
                 => opt.UseNpgsql(builder.Configuration["NpgSql:ConnectionString"]));
