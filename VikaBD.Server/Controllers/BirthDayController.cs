@@ -108,7 +108,7 @@ namespace VikaBD.Server.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
                 _logger.LogError(ex.Message, ex);
             }
         }

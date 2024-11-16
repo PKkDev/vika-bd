@@ -1,8 +1,8 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using VikaBD.Server.Context;
+using NLog.Web;
 
 namespace VikaBD.Server
 {
@@ -11,6 +11,10 @@ namespace VikaBD.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Logging.ClearProviders();
+            builder.Logging.SetMinimumLevel(LogLevel.Trace);
+            builder.Host.UseNLog();
 
             builder.Configuration.AddJsonFile(
                 Path.Combine(AppContext.BaseDirectory, "appsettings.private.json")
