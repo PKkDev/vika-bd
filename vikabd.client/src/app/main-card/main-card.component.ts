@@ -38,7 +38,11 @@ export class MainCardComponent implements OnInit {
           }
           // console.log(value);
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.isUserFounded = false;
+          this.isInitialLoading = true;
+          console.error(err);
+        },
       })
   }
 
