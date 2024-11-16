@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+type Guest = {
+  name: string
+}
+
 @Component({
   selector: 'app-main-card',
   templateUrl: './main-card.component.html',
@@ -21,14 +25,14 @@ export class MainCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get(`${this._baseurl}/birth-day/check-guest?ident=${this.name}`)
+    this.http.get<Guest>(`${this._baseurl}/birth-day/check-guest?ident=${this.name}`)
       .subscribe({
-        next: (value) => {
+        next: (value: Guest) => {
           this.isInitialLoading = false;
 
           this.isUserFounded = !!value;
           if (value) {
-
+            this.name = value.name;
           } else {
 
           }
