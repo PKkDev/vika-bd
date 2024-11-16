@@ -7,9 +7,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  public isMobile = false;
-
-  constructor() { }
+  public isMobile = false; 
 
   ngOnInit() {
     this.checkIsPhone();
@@ -27,7 +25,7 @@ export class AppComponent implements OnInit {
 
     const test = (iphone || android) && screen.availWidth < 480
 
-    console.log(test, userAgent);
+    // console.log(test, userAgent);
 
     if (test) {
       this.isMobile = true;

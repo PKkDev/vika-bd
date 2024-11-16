@@ -8,72 +8,87 @@
     background-size: cover;
     background-position: center;
     background-color: #000;
-}
 
-h2 {
-    line-height: 100px;
-    font-size: 50px;
-    width: 100%;
-    position: absolute;
-    margin: 0;
-    text-align: center;
-    color: #ecf0f1;
-}
+    h2 {
+        line-height: 50px;
+        font-size: 50px;
+        width: 100%;
+        position: absolute;
+        margin: 0;
+        text-align: center;
+        color: #ecf0f1;
+    }
 
-.one {
-    top: 0;
-    opacity: 0;
-    animation: oneAnim 2s linear 0s 1 normal forwards;
-}
-
-@keyframes oneAnim {
-    0% {
+    .one {
         top: 0;
         opacity: 0;
+        animation: oneAnim 2s linear 0s 1 normal forwards;
+
+        @keyframes oneAnim {
+            0% {
+                top: -10%;
+                opacity: 0;
+            }
+
+            100% {
+                top: 5%;
+                opacity: 1;
+            }
+        }
     }
 
-    100% {
-        top: 5%;
-        opacity: 1;
-    }
-}
-
-.two {
-    top: 15%;
-    opacity: 0;
-    animation: twoAnim 2s linear 2s 1 normal forwards;
-}
-
-@keyframes twoAnim {
-    0% {
-        left: -100%;
+    .two {
+        top: 12%;
         opacity: 0;
+        animation: twoAnim 2s linear 1s 1 normal forwards;
+
+        @keyframes twoAnim {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
     }
 
-    100% {
-        left: 0;
-        opacity: 1;
-    }
-}
-
-.three {
-    top: 27%;
-    opacity: 0;
-    animation: threeAnim 2s linear 2s 1 normal forwards;
-}
-
-@keyframes threeAnim {
-    0% {
-        right: -100%;
+    .three {
+        top: 19%;
         opacity: 0;
+        animation: threeAnim 2s linear 2s 1 normal forwards;
+
+        @keyframes threeAnim {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            100% {
+                left: 0;
+                opacity: 1;
+            }
+        }
     }
 
-    100% {
-        right: 0;
-        opacity: 1;
+    .four {
+        top: 27%;
+        opacity: 0;
+        animation: fourAnim 2s linear 2s 1 normal forwards;
+
+        @keyframes fourAnim {
+            0% {
+                right: -100%;
+                opacity: 0;
+            }
+
+            100% {
+                right: 0;
+                opacity: 1;
+            }
+        }
     }
 }
-
 
 .btn-container {
     position: absolute;
@@ -83,50 +98,50 @@ h2 {
     display: flex;
     justify-content: space-around;
     animation: btnAnim 2s linear 3s 1 normal forwards;
-}
 
-@keyframes btnAnim {
-    0% {
-        opacity: 0;
-        bottom: 0;
+    @keyframes btnAnim {
+        0% {
+            opacity: 0;
+            bottom: 0;
+        }
+
+        100% {
+            opacity: 1;
+            bottom: 35%;
+        }
     }
 
-    100% {
-        opacity: 1;
-        bottom: 35%;
-    }
-}
-
-.btn-container button {
-    font-family: "Lato", sans-serif;
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-    border: transparent;
-    background: #ecf0f1;
-    font-size: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-container .yes {
-    background: #16a085;
-    box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.2);
-    animation: yesAnim 2s linear 0s infinite alternate forwards;
-}
-
-.btn-container .no {
-    opacity: .8;
-}
-
-@keyframes yesAnim {
-    0% {
-        transform: scale(1);
+    button {
+        font-family: inherit;
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        border: transparent;
+        background: #ecf0f1;
+        font-size: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    100% {
-        transform: scale(0.9);
+    .yes {
+        background: #16a085;
+        box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.2);
+        animation: yesAnim 2s linear 0s infinite alternate forwards;
+    }
+
+    @keyframes yesAnim {
+        0% {
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(0.9);
+        }
+    }
+
+    .no {
+        opacity: .8;
     }
 }
 
@@ -138,5 +153,15 @@ h2 {
 
     display: flex;
     align-items: center;
+
+    h2 {
+        line-height: 50px;
+        font-size: 50px;
+        width: 100%;
+        position: absolute;
+        margin: 0;
+        text-align: center;
+        color: #ecf0f1;
+    }
 
 }

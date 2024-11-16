@@ -32,7 +32,7 @@ export class MainCardComponent implements OnInit {
           } else {
 
           }
-          console.log(value);
+          // console.log(value);
         },
         error: (err) => console.error(err),
       })
