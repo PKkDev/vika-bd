@@ -25,6 +25,7 @@ namespace VikaBD.Server.Controllers
         public async Task<IActionResult> Guests()
         {
             var res = await _context.Guest.ToListAsync();
+            res.ForEach(x => x.Name = x.Name.Trim());
             return Ok(res);
         }
 
