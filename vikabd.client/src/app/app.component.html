@@ -1,1 +1,9 @@
-﻿<router-outlet></router-outlet>
+﻿<ng-container *ngIf="isMobile; else fifBrowser">
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #fifBrowser>
+    <div class="container-not-found">
+        <h2> Устройство не поддерживается </h2>
+    </div>
+</ng-template>

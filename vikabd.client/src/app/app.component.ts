@@ -1,33 +1,40 @@
-
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
 
-  constructor(private http: HttpClient) { }
+  public isMobile = false;
+
+  constructor() { }
 
   ngOnInit() {
-    this.getForecasts();
+    this.checkIsPhone();
   }
 
-  getForecasts() {
-    // this.http.get<WeatherForecast[]>('/weatherforecast').subscribe({
-    //   next: (result) => this.forecasts = result,
-    //   error: (error) => console.error(error)
-    // }
-    // );
+  @HostListener("window:resize") onMouseEnter() {
+    this.checkIsPhone();
+  }
+
+  private checkIsPhone() {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    const iphone = userAgent.search('iphone') > -1
+    const android = userAgent.search('android') > -1
+
+    const test = (iphone || android) && screen.availWidth < 480
+
+    console.log(test, userAgent);
+
+    if (test) {
+      this.isMobile = true;
+      return;
+    }
+
+    this.isMobile = false;
   }
 
 }
