@@ -1,0 +1,62 @@
+name: UI Build + Deploy
+
+on:
+  push:
+    branches: ["main", "dev/*"]
+  #  branches: ["release"]
+  #pull_request:
+  #  branches: ["main", "dev/*"]
+  #  branches: ["release"]
+  #pull_request_target:
+  #  types: ["closed"]
+  #  branches: ["release"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./vikabd.client/
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+
+#      - name: ui-build action
+#        uses: IndustrialHolding/ui-build@v1
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: "./vikabd.client/package-lock.json"
+
+      - name: Run ci
+        run: npm ci
+
+      #- name: Run tests
+      #  run: npm run test:prod
+
+      #- name: Run lint
+      #  run: npm run lint
+
+      - name: Build
+        run: npm run build:prod
+
+      - name: SFTP deploy
+        if: success()
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          local_path: "./vikabd.client/dist/vikabd.client/*"
+          remote_path: "/var/www/vikabirthday"
+          delete_remote_files: true
