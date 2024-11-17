@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorCardComponent } from './error-card/error-card.component';
 import { MainCardComponent } from './main-card/main-card.component';
+import { NameConverterPipe } from './name-converter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainCardComponent,
     AcceptedCardComponent,
-    ErrorCardComponent
+    ErrorCardComponent,
+    NameConverterPipe
   ],
   imports: [
     BrowserModule,
