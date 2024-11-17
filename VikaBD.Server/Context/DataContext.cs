@@ -7,17 +7,11 @@ namespace VikaBD.Server.Context
     {
         public DbSet<Guest> Guest { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options)
-            : base(options)
-        {
-            // Database.EnsureDeleted();
-            // Database.EnsureCreated();
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("public");
-            //base.OnModelCreating(modelBuilder);
         }
     }
 }

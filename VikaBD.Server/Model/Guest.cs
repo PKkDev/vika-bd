@@ -16,5 +16,8 @@ namespace VikaBD.Server.Model
 
         [Column("answer")]
         public bool? Answer { get; set; }
+
+        [Column("key")]
+        public string Key { get; set; }
     }
 }

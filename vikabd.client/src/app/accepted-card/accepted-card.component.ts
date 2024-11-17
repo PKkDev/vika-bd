@@ -10,18 +10,19 @@ import { Guest } from '../model/guest';
 })
 export class AcceptedCardComponent implements OnInit {
 
-  public name: string = 'name';
+  public name: string = 'none';
+  public key: string = 'key';
 
   constructor(
     @Inject('BASE_URL') private baseUrl: string,
     private router: Router,
     activateRoute: ActivatedRoute,
     private http: HttpClient) {
-    this.name = activateRoute.snapshot.params["name"];
+    this.key = activateRoute.snapshot.params["key"];
   }
 
   ngOnInit() {
-    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.name}`)
+    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.key}`)
       .subscribe({
         next: (value: Guest) => {
           if (value) {
@@ -41,10 +42,10 @@ export class AcceptedCardComponent implements OnInit {
   }
 
   public onNewAnswer() {
-    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.name}`, null)
+    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.key}`, null)
       .subscribe({
         next: (value) => {
-          this.router.navigateByUrl(`${this.name}`);
+          this.router.navigateByUrl(`${this.key}`);
           console.log(value);
         },
         error: (err) => console.error(err),

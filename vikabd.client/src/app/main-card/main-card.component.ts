@@ -10,7 +10,8 @@ import { Guest } from '../model/guest';
 })
 export class MainCardComponent implements OnInit {
 
-  public name: string = 'name';
+  public name: string = 'none';
+  public key: string = 'key';
 
   public isUserSayNo = false;
   public isInitialLoading = true;
@@ -20,11 +21,11 @@ export class MainCardComponent implements OnInit {
     private router: Router,
     activateRoute: ActivatedRoute,
     private http: HttpClient) {
-    this.name = activateRoute.snapshot.params["name"];
+    this.key = activateRoute.snapshot.params["key"];
   }
 
   ngOnInit() {
-    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.name}`)
+    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.key}`)
       .subscribe({
         next: (value: Guest) => {
           this.isInitialLoading = false;
@@ -32,7 +33,7 @@ export class MainCardComponent implements OnInit {
           if (value) {
             this.name = value.name;
             if (value.answer) {
-              this.router.navigateByUrl(`accepted/${this.name}`);
+              this.router.navigateByUrl(`accepted/${this.key}`);
             } else {
             }
           } else {
@@ -47,18 +48,18 @@ export class MainCardComponent implements OnInit {
   }
 
   public onYes() {
-    this.http.put(`${this.baseUrl}/birth-day/guest-say-yes?ident=${this.name}`, null)
+    this.http.put(`${this.baseUrl}/birth-day/guest-say-yes?ident=${this.key}`, null)
       .subscribe({
         next: (value) => {
           console.log(value);
-          this.router.navigateByUrl(`accepted/${this.name}`);
+          this.router.navigateByUrl(`accepted/${this.key}`);
         },
         error: (err) => console.error(err),
       })
   }
 
   public onNo() {
-    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.name}`, null)
+    this.http.put(`${this.baseUrl}/birth-day/guest-say-no?ident=${this.key}`, null)
       .subscribe({
         next: (value) => {
           console.log(value);

@@ -11,15 +11,15 @@ const routes: Routes = [
     redirectTo: 'додик'
   },
   {
-    path: 'error/:name',
+    path: 'error/:key',
     component: ErrorCardComponent
   },
   {
-    path: 'accepted/:name',
+    path: 'accepted/:key',
     component: AcceptedCardComponent
   },
   {
-    path: ':name',
+    path: ':key',
     component: MainCardComponent
   }
 ];

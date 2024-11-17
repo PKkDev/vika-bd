@@ -26,7 +26,7 @@ namespace VikaBD.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet("guests")]
+        [HttpGet("hide-guests-get-chek-for")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Guests()
         {
@@ -37,18 +37,24 @@ namespace VikaBD.Server.Controllers
 
         [HttpGet("check-guest")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<Guest> CheckGues(string ident)
+        public async Task<Guest?> CheckGues(string ident)
         {
             var res = await _context.Guest
-                .Where(x => x.Name.Trim().ToLower() == ident.ToLower() || x.Id.ToString() == ident)
+                .Where(x => x.Key.Trim().ToLower() == ident.ToLower())
                 .FirstOrDefaultAsync();
 
             if (res != null)
             {
                 res.Name = res.Name.Trim();
+
+                return new()
+                {
+                    Name = res.Name,
+                    Answer = res.Answer,
+                };
             }
 
-            return res;
+            return null;
         }
 
         [HttpPut("guest-say-yes")]
@@ -56,7 +62,7 @@ namespace VikaBD.Server.Controllers
         public async Task<bool> GuestSayYes(string ident)
         {
             var res = await _context.Guest
-                .Where(x => x.Name == ident || x.Id.ToString() == ident)
+                .Where(x => x.Key.Trim().ToLower() == ident.ToLower())
                 .FirstOrDefaultAsync();
 
             if (res != null)
@@ -77,7 +83,7 @@ namespace VikaBD.Server.Controllers
         public async Task<bool> GuestSayNo(string ident)
         {
             var res = await _context.Guest
-                .Where(x => x.Name == ident || x.Id.ToString() == ident)
+                .Where(x => x.Key.Trim().ToLower() == ident.ToLower())
                 .FirstOrDefaultAsync();
 
             if (res != null)
@@ -99,7 +105,7 @@ namespace VikaBD.Server.Controllers
             var message = $"{guest.Name.Trim()} сказал {result}";
 
             message += "\nвсе:\n";
-            message += "https://www.vika-birthday.ru/api/birth-day/guests";
+            message += "https://www.vika-birthday.ru/api/birth-day/hide-guests-get-chek-for";
 
             await SendToChat("1077072257", message);
             await SendToChat("1338551358", message);
