@@ -51,4 +51,8 @@ export class AcceptedCardComponent implements OnInit {
       })
   }
 
+  // public onGoToMap() {
+  //   window.open('https://yandex.ru/maps/-/CDxeE6mD', '_blank');
+  // }
+
 }
