@@ -25,7 +25,7 @@ export class MainCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${this.key}`)
+    this.http.get<Guest>(`${this.baseUrl}/birth-day/check-guest?ident=${encodeURI(this.key)}`)
       .subscribe({
         next: (value: Guest) => {
           this.isInitialLoading = false;
@@ -37,12 +37,12 @@ export class MainCardComponent implements OnInit {
             } else {
             }
           } else {
-            this.router.navigateByUrl(`error/${this.name}`);
+            this.router.navigateByUrl(`error/${this.key}`);
           }
         },
         error: (err) => {
           console.error(err);
-          this.router.navigateByUrl(`error/${this.name}`);
+          this.router.navigateByUrl(`error/${this.key}`);
         },
       })
   }

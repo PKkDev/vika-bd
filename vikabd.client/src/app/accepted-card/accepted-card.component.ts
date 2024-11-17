@@ -28,15 +28,15 @@ export class AcceptedCardComponent implements OnInit {
           if (value) {
             this.name = value.name;
             if (!value.answer) {
-              this.router.navigateByUrl(`${this.name}`);
+              this.router.navigateByUrl(`${this.key}`);
             }
           } else {
-            this.router.navigateByUrl(`error/${this.name}`);
+            this.router.navigateByUrl(`error/${this.key}`);
           }
         },
         error: (err) => {
           console.error(err);
-          this.router.navigateByUrl(`error/${this.name}`);
+          this.router.navigateByUrl(`error/${this.key}`);
         },
       })
   }
