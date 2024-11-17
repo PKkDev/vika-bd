@@ -40,14 +40,14 @@ internal class Program
 
             var encrypted = msEncrypt.ToArray();
             var encryptedStr = Convert.ToBase64String(encrypted);
-            var encryptedStrUrl = System.Net.WebUtility.UrlEncode(encryptedStr);
-            var encryptedStrUrlSafe = Uri.EscapeDataString(encryptedStr);
+            //var encryptedStrUrl = System.Net.WebUtility.UrlEncode(encryptedStr);
+            //var encryptedStrUrlSafe = Uri.EscapeDataString(encryptedStr);
             var encryptedStrUrlSafeV2 = UrlEncode(encryptedStr);
 
             Console.WriteLine($"Для {item}");
             Console.WriteLine($"encryptedStr: {encryptedStr}");
-            Console.WriteLine($"encryptedStrUrl: {encryptedStrUrl}");
-            Console.WriteLine($"encryptedStrUrlSafe: {encryptedStrUrlSafe}");
+            //Console.WriteLine($"encryptedStrUrl: {encryptedStrUrl}");
+            //Console.WriteLine($"encryptedStrUrlSafe: {encryptedStrUrlSafe}");
             Console.WriteLine($"encryptedStrUrlSafeV2: {encryptedStrUrlSafeV2}");
             Console.WriteLine();
         }
